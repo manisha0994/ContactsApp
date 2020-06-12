@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         sharelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocationSDK locationSDK = new LocationSDK("9234513931");
+                LocationSDK locationSDK = new LocationSDK("9234513931",findViewById(R.id.maincontainer));
                 locationSDK.startLocation(MainActivity.this);
             }
         });

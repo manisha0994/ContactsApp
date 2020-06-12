@@ -6,6 +6,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,12 +36,18 @@ public class LocationSDK implements GoogleApiClient.ConnectionCallbacks {
     FusedLocationProviderClient locationProviderClientocation;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String phone;
-    LocationSDK(String phone){
+    View view;
+    LocationSDK(String phone, View view){
        this.phone = phone;
+       this.view = view;
     }
 
     public void startLocation(final Context context){
-        Toast.makeText(context, "Sharing....", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "Sharing....", Toast.LENGTH_SHORT).show();
+
+        Snackbar snackbar = Snackbar.make(view,"Sharing Location ...",Snackbar.LENGTH_LONG);
+        snackbar.show();
+
         locationProviderClientocation = LocationServices.getFusedLocationProviderClient(context);
         locationProviderClientocation.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
@@ -74,7 +82,11 @@ public class LocationSDK implements GoogleApiClient.ConnectionCallbacks {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Log.d("TAG", "onSuccess: Save");
-                                                Toast.makeText(context, "Shared Successfully", Toast.LENGTH_SHORT).show();
+
+                                                Snackbar snackbar = Snackbar.make(view,"Location Shared",Snackbar.LENGTH_LONG);
+                                                snackbar.show();
+
+                                               // Toast.makeText(context, "Shared Successfully", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
