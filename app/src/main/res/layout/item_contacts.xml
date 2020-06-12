@@ -41,8 +41,19 @@
         android:backgroundTint="#55b8ed"
         app:layout_constraintTop_toTopOf="@+id/icon"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
-        app:layout_constraintEnd_toEndOf="@+id/icon"
+        app:layout_constraintEnd_toStartOf="@id/imgbtn3"
+        />
 
+    <ImageButton
+        android:id="@+id/imgbtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:background="@drawable/stylecircle"
+        android:backgroundTint="#55b8ed"
+        app:layout_constraintTop_toTopOf="@+id/icon"
+        app:layout_constraintBottom_toBottomOf="@+id/icon"
+        app:layout_constraintEnd_toEndOf="@+id/icon"
         />
 
 

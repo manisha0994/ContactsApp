@@ -5,14 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static  final String databasename = "Student";
-
+    Context context;
     public DatabaseHelper(@Nullable Context context) {
         super(context, databasename, null, 1);
+        this.context = context;
 
     }
     @Override
@@ -26,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+//// insert data into database
    public boolean insert(String name, String phone, String email){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select phone from contactlist where phone = "+phone,null);
@@ -43,9 +46,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return false;
             }
             else{
+                Toast.makeText(context,"Contact Saved", Toast.LENGTH_LONG).show();
                 return true;
             }
         }
+
+    }
+
+    // for delete data from database
+    public void delete(String phone){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("delete from contactlist where phone = "+phone);
 
     }
 

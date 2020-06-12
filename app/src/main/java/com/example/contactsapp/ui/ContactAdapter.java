@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.contactsapp.R;
 import com.example.contactsapp.ui.activity.LocationActivity;
+import com.example.contactsapp.ui.database.DatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                 context.startActivity(intent);
             }
         });
+
+        holder.imgbtn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHelper databaseHelper = new DatabaseHelper(context);
+                databaseHelper.delete(arrayList.get(position).contno);
+                arrayList.remove(arrayList.get(position));
+                notifyDataSetChanged();
+            }
+        });
     }
     void call(String phone){
         Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -99,12 +110,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     class  ContactViewHolder extends RecyclerView.ViewHolder {
 
         TextView icon;
-        ImageButton imgbtn1,imgbtn2;
+        ImageButton imgbtn1,imgbtn2,imgbtn3;
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.icon);
             imgbtn1 = itemView.findViewById(R.id.imgbtn1);
             imgbtn2 = itemView.findViewById(R.id.imgbtn2);
+            imgbtn3 = itemView.findViewById(R.id.imgbtn3);
         }
     }
 
