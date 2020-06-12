@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.contactsapp.R;
+import com.example.contactsapp.ui.activity.LocationActivity;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             @Override
             public void onClick(View view) {
                 email(arrayList.get(position).email);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, LocationActivity.class);
+                intent.putExtra("phone",arrayList.get(position).contno);
+                context.startActivity(intent);
             }
         });
     }

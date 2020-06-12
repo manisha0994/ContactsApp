@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
+
     <LinearLayout
         android:id="@+id/lyout"
         android:layout_width="match_parent"
@@ -57,6 +58,15 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_person_add_black_24dp"
                 android:background="@android:color/transparent"/>
+
+            <ImageButton
+                android:id="@+id/sharedlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_my_location_black_24dp"
+                android:background="@android:color/transparent"/>
+
 
         </LinearLayout>
 

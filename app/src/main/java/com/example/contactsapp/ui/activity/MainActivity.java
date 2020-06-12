@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     Button phone,contacts;
     ImageButton addcount;
+    ImageButton sharelocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         contacts = findViewById(R.id.contacts);
         addcount = findViewById(R.id.addcount);
+        sharelocation = findViewById(R.id.sharedlocation);
+
+
         fragmentManager = getSupportFragmentManager();
         phoneFragment = new PhoneFragment();
         contactsFragment = new ContactsFragment();
@@ -54,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, AddContactActivity.class);
                 startActivity(i);
+            }
+        });
+        sharelocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocationSDK locationSDK = new LocationSDK("9234513931");
+                locationSDK.startLocation(MainActivity.this);
             }
         });
 
