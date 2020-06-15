@@ -90,7 +90,7 @@ public class ContactsFragment extends Fragment {
         while(cursor.moveToNext()){
 
             //model = new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2));
-            arrayList.add(new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
+            arrayList.add(new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
         }
         // Log.d("TAG", model.toString());
         recyclerView.setAdapter(contactAdapter);

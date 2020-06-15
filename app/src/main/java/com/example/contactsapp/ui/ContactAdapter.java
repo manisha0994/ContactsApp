@@ -4,12 +4,16 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
     ArrayList<Model> arrayList = null;
@@ -45,6 +50,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, final int position) {
         holder.icon.setText(arrayList.get(position).name);
+        byte[] bytes = Base64.decode(arrayList.get(position).image,Base64.DEFAULT);
+        holder.contimage.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
         holder.imgbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +117,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     class  ContactViewHolder extends RecyclerView.ViewHolder {
 
         TextView icon;
+        CircleImageView contimage;
         ImageButton imgbtn1,imgbtn2,imgbtn3;
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +125,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             imgbtn1 = itemView.findViewById(R.id.imgbtn1);
             imgbtn2 = itemView.findViewById(R.id.imgbtn2);
             imgbtn3 = itemView.findViewById(R.id.imgbtn3);
+            contimage = itemView.findViewById(R.id.contimage);
         }
     }
 

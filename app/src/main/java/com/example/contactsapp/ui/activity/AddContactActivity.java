@@ -35,6 +35,8 @@ public class AddContactActivity extends AppCompatActivity {
     EditText nametext,contno,emailedit;
     Button save;
 
+    Bitmap image;
+
     DatabaseHelper databaseHelper;
 
     @Override
@@ -60,7 +62,7 @@ public class AddContactActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(databaseHelper.insert(nametext.getText().toString(),contno.getText().toString(),emailedit.getText().toString())){
+                if(databaseHelper.insert(nametext.getText().toString(),contno.getText().toString(),emailedit.getText().toString(),image)){
                     Log.d("Database", "Inserted ");
                 }
                 else{
@@ -128,13 +130,14 @@ public class AddContactActivity extends AppCompatActivity {
         while(cursor.moveToNext()){
 
             //model = new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2));
-            arrayList.add(new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
+            arrayList.add(new Model(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
         }
        // Log.d("TAG", model.toString());
         Log.d("TAG", arrayList.size()+" ");
     }
     public void openCamera(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         startActivityForResult(i,123);
     }
 
@@ -151,6 +154,7 @@ public class AddContactActivity extends AppCompatActivity {
         if(requestCode==123){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            image = bitmap;
         }
     }
 }
