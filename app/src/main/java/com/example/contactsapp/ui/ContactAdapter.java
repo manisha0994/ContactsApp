@@ -71,6 +71,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             public void onClick(View view) {
                 Intent intent = new Intent(context, LocationActivity.class);
                 intent.putExtra("phone",arrayList.get(position).contno);
+                intent.putExtra("name",arrayList.get(position).name);
+                intent.putExtra("image",arrayList.get(position).image);
                 context.startActivity(intent);
             }
         });
