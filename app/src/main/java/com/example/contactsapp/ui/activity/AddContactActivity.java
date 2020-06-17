@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.contactsapp.R;
 import com.example.contactsapp.ui.Model;
@@ -38,6 +40,7 @@ public class AddContactActivity extends AppCompatActivity {
     Bitmap image;
 
     DatabaseHelper databaseHelper;
+    Boolean isimageloaded =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,18 @@ public class AddContactActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(databaseHelper.insert(nametext.getText().toString(),contno.getText().toString(),emailedit.getText().toString(),image)){
-                    Log.d("Database", "Inserted ");
+                if(isimageloaded && !TextUtils.isEmpty(nametext.getText())&& !TextUtils.isEmpty(contno.getText())) {
+                    if (databaseHelper.insert(nametext.getText().toString(), contno.getText().toString(), emailedit.getText().toString(), image)) {
+                        Log.d("Database", "Inserted ");
+                    } else {
+                        Log.d("Database", "Not Inserted");
+                    }
+
+                   // getdata();
                 }
                 else{
-                    Log.d("Database","Not Inserted");
+                    Toast.makeText(AddContactActivity.this,"Please enter contact no",Toast.LENGTH_LONG).show();
                 }
-                getdata();
                // saveToContact();
             }
         });
@@ -154,7 +162,9 @@ public class AddContactActivity extends AppCompatActivity {
         if(requestCode==123){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            isimageloaded = true;
             image = bitmap;
         }
     }
+
 }
