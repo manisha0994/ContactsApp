@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         sharelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocationSDK locationSDK = new LocationSDK("9234513931",findViewById(R.id.maincontainer));
+                SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("shared",MODE_PRIVATE);
+                LocationSDK locationSDK = new LocationSDK(sharedPreferences.getString("My_phone",null),findViewById(R.id.maincontainer));
                 locationSDK.startLocation(MainActivity.this);
             }
         });
